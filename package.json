@@ -1,0 +1,19 @@
+{
+  "name": "gcadv-react-native",
+  "version": "0.0.0",
+  "description": "Hello Expo!",
+  "author": null,
+  "private": true,
+  "main": "main.js",
+  "dependencies": {
+    "expo": "17.0.0",
+    "firebase": "^4.1.3",
+    "react": "16.0.0-alpha.6",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-17.0.0.tar.gz",
+    "react-native-communications": "^2.2.1",
+    "react-native-router-flux": "^3.40.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.0",
+    "redux-thunk": "^2.2.0"
+  }
+}

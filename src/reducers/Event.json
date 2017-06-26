@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Event Title",
+    "description": "Event Description",
+    "address": "2300 Windy Ridge Pkwy SE, Atlanta GA, 30339-0003",
+    "date": "Monday October 20th, 2017",
+    "time": "6:00PM - 10:30PM",
+    "image": "gs://gcadv-project.appspot.com/Event1/Event.jpg",
+    "performers": [
+      {
+        "name": "artist name",
+        "type": "Music",
+        "time": "7:30PM - 9:00PM",
+        "image": "gs://gcadv-project.appspot.com/Event1/Performers/band-img.jpg",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+      },
+      {
+        "name": "artist name",
+        "type": "Music",
+        "time": "7:30PM - 9:00PM",
+        "image": "gs://gcadv-project.appspot.com/Event1/Performers/band-img.jpg",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+      },
+      {
+        "name": "artist name",
+        "type": "Music",
+        "time": "7:30PM - 9:00PM",
+        "image": "gs://gcadv-project.appspot.com/Event1/Performers/band-img.jpg",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+      }
+    ]
+  }
+]

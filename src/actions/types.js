@@ -1,0 +1,13 @@
+export const SET_IMG = 'set_img';
+export const SELECT_ABOUT = 'select_about';
+export const TOGGLE_DRAWER = 'toggle_drawer';
+export const EVENT_ID = 'event_id';
+export const IMAGE_LOADING = 'image_loading';
+export const HIDE_BAR = 'hide_bar';
+export const EMAIL_ENTERED = 'email_entered';
+export const PASSWORD_ENTERED = 'password_entered';
+export const LOGIN_USER_SUCESS = 'login_user_success';
+export const LOGIN_USER_FAILED = 'login_user_failed';
+export const LOGIN_USER = 'login_user';
+export const FACEBOOK_LOGIN_SUCCESS = 'facebook_login_success';
+export const FACEBOOK_LOGIN_FAILED = 'facebook_login_failed';
