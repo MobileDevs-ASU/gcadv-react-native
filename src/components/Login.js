@@ -19,7 +19,8 @@ import {
   emailChanedText,
   passwordChangedText,
   loginUser,
-  facebookLogin
+  facebookLogin,
+  attemptLogin
 } from '../actions';
 
 class Login extends Component {
@@ -104,7 +105,7 @@ const styles = {
     flex: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 50
+    marginBottom: 50,
   },
   headerText: {
     textAlign: 'center',

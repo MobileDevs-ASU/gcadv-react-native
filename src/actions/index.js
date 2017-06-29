@@ -19,6 +19,7 @@ import {
   FACEBOOK_LOGIN_FAILED
 } from './types';
 
+export * from './chatActions';
 
 export const selectAbout = (aboutId) => {
   return {
@@ -83,14 +84,12 @@ export const loginUser = ({email, password}) =>  async dispatch => {
   }else{
     dispatch({type: LOGIN_USER});
     firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(async user => {
-        await AsyncStorage.setItem('user', user.uid);
+      .then(user => {
         loginUserSucess(dispatch, user);
       })
       .catch(() => {
         firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then(async user => {
-            await AsyncStorage.setItem('user', user.uid);
+          .then(user => {
             loginUserSucess(dispatch, user)
           })
           .catch(() => loginUserFailed(dispatch));
@@ -136,3 +135,11 @@ const doFaceBookLogin = async dispatch => {
   Actions.main();
   dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
 };
+
+// export const attemptLogin = (dispatch) => {
+//   var token = AsyncStorage.getItem('user');
+//   if(token) {
+//     Actions.main();
+//     dispatch({ type: LOGIN_USER_SUCESS, payload: user })
+//   }
+// }

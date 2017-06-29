@@ -14,3 +14,4 @@ export * from './DescriptiveImage';
 export * from './EventHeader';
 export * from './Input';
 export * from './Button';
+export * from './MessageBox';

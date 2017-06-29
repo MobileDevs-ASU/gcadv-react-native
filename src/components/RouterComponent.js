@@ -5,6 +5,7 @@ import Home from './Home';
 import Donate from './Donate'
 import Event from './Event'
 import Login from './Login'
+import Chat from './Chat';
 
 const RouterComponent = (props) => {
   return (
@@ -13,7 +14,6 @@ const RouterComponent = (props) => {
         <Scene
           key="login"
           component={ Login }
-
         />
       </Scene>
 
@@ -42,6 +42,13 @@ const RouterComponent = (props) => {
           hideNavBar={true}
           passProps={true}
           onPress={props.onPress}
+        />
+
+        <Scene
+          component={ Chat }
+          key="chat"
+          hideNavBar={ true }
+          initial
         />
 
         <Scene

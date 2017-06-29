@@ -11,3 +11,5 @@ export const LOGIN_USER_FAILED = 'login_user_failed';
 export const LOGIN_USER = 'login_user';
 export const FACEBOOK_LOGIN_SUCCESS = 'facebook_login_success';
 export const FACEBOOK_LOGIN_FAILED = 'facebook_login_failed';
+export const CHAT_TEXT_CHANGED = 'chat_text_changed';
+export const MESSAGE_FETCH_SUCCESS = 'message_fetch_success';
