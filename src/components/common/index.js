@@ -15,3 +15,4 @@ export * from './EventHeader';
 export * from './Input';
 export * from './Button';
 export * from './MessageBox';
+export * from './Message';

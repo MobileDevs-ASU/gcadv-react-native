@@ -13,3 +13,6 @@ export const FACEBOOK_LOGIN_SUCCESS = 'facebook_login_success';
 export const FACEBOOK_LOGIN_FAILED = 'facebook_login_failed';
 export const CHAT_TEXT_CHANGED = 'chat_text_changed';
 export const MESSAGE_FETCH_SUCCESS = 'message_fetch_success';
+export const LOADING_MESSAGE = 'loading_message';
+export const MESSAGE_SENT = 'message_sent';
+export const MESSAGE_FAILED = 'message_failed';

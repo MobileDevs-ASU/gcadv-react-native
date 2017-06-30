@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import { Spinner } from './index'
 
 const MessageBox = (props) => {
   const {
@@ -13,19 +14,33 @@ const MessageBox = (props) => {
     text,
     button
   } = styles
+
+  renderButton = () => {
+    console.log("LOADING: " + props.loading);
+    if (props.loading) {
+      return <Spinner color="white" animating={true} size="large"/>
+    }else{
+      return (
+        <TouchableOpacity
+          onPress={props.onPress}
+        >
+          <Text style={ text }>Send</Text>
+        </TouchableOpacity>
+      )
+    }
+  }
+
   return (
     <View style={ container }>
       <TextInput
         style={ input }
         placeholder="enter message here"
         onChangeText={ props.onChangeText }
+        value={ props.value }
       />
-      <TouchableOpacity
-        style={button}
-        onPress={props.onPress}
-      >
-        <Text style={ text }>Send</Text>
-      </TouchableOpacity>
+      <View style={ button }>
+        { this.renderButton() }
+      </View>
     </View>
   );
 }
