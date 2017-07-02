@@ -20,7 +20,8 @@ import {
   passwordChangedText,
   loginUser,
   facebookLogin,
-  attemptLogin
+  attemptLogin,
+  getEvents
 } from '../actions';
 
 class Login extends Component {
@@ -67,6 +68,7 @@ class Login extends Component {
       headerStyle,
       iconStyle
     } = styles
+    this.props.getEvents();
     return (
       <View style={{flex: 1}}>
         <View style={container}>
@@ -141,5 +143,6 @@ export default connect(mapStateToProps, {
   emailChanedText,
   passwordChangedText,
   loginUser,
-  facebookLogin
+  facebookLogin,
+  getEvents
 })(Login)

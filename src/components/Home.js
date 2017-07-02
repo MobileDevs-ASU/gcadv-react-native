@@ -4,7 +4,9 @@ import {
   Text,
   Image,
   TouchableWithoutFeedback,
+  ListView
 } from 'react-native';
+import _ from 'lodash';
 import { LinearGradient, Components } from 'expo';
  import { connect } from'react-redux'
  import { Actions } from 'react-native-router-flux';
@@ -14,9 +16,10 @@ import {
   CardImage,
   Footer,
   Header,
-  Spinner
+  Spinner,
+  EventCard
  } from './common';
- import { imageLoading } from '../actions'
+ import { imageLoading, getEvents, goToEvent } from '../actions'
 
 
 import GCADVLogo from '../images/GCADV_logo.png';
@@ -24,31 +27,57 @@ import EventImg from './../../assets/images/Event.jpg'
 
 
 class Home extends Component {
+  componentWillMount() {
+    this.props.getEvents();
+    this.createDataSource(this.props)
+  }
+
+  createDataSource({ events }) {
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
+    this.dataSource = ds.cloneWithRows(events);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.createDataSource(nextProps);
+  }
+
+  onPress = (event) => {
+    this.props.goToEvent(event);
+    Actions.event({ type: 'replace' })
+  }
+
+  renderRows = (event) => {
+    return (
+      <EventCard
+        event={event}
+        onPress={this.onPress.bind(this, event)}
+      />
+    )
+  }
 
   showImage(bool) {
     this.props.imageLoading(bool);
   }
 
   render() {
-    const { description, title } = this.props.events[0];
-    console.log(description)
+    const {
+      title,
+      description,
+      image
+    } = this.props.events[0];
     const { headerImageStyle, AnimatedContianer } = styles
     return (
       <View style={{flex: 1, zIndex: -1}}>
         <Header onPress={this.props.onPress}>
           <Image source={ GCADVLogo } style={ headerImageStyle } />
         </Header>
-        <Card style={{ flex: 1 }}>
-          <CardHeader
-            eventTitle={title}
-            eventDescription={description}
-            onPress={this.props.onEventPress}
-          />
-          <CardImage
-            source={EventImg}
-          >
-          </CardImage>
-        </Card>
+        <ListView
+          enableEmptySections
+          dataSource={ this.dataSource }
+          renderRow={ this.renderRows }
+        />
         <Footer />
       </View>
     );
@@ -74,11 +103,14 @@ const styles = {
 }
 
 const mapStateToProps = state => {
+  const events = _.map(state.events.events, (val, uid) => {
+    return { ...val, uid };
+  });
   return {
-    events: state.events,
+    events,
     image: state.image
   }
 }
 
 
-export default connect(mapStateToProps, {imageLoading})(Home);
+export default connect(mapStateToProps, {imageLoading, getEvents, goToEvent})(Home);

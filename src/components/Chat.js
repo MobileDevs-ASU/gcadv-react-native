@@ -10,13 +10,14 @@ import * as firebase from 'firebase';
 import { chatChanged, messageSent, messageFetched } from './../actions';
 import {
   MessageBox,
-  Message
+  Message,
+  Header
 } from './common';
 
 class Chat extends Component {
   componentWillMount() {
-    this.props.messageFetched();
     this.createDataSource(this.props);
+    this.props.messageFetched(this.props.eventId);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,7 +33,7 @@ class Chat extends Component {
   }
 
   onPress = () => {
-    this.props.messageSent(this.props.message, this.props.user);
+    this.props.messageSent(this.props.eventId, this.props.message, this.props.user);
   }
 
   renderRow = (message) => {
@@ -46,6 +47,9 @@ class Chat extends Component {
     } = styles
     return (
       <View style={ container }>
+        <Header>
+          <Text>{this.props.eventId}</Text>
+        </Header>
         <ListView
           enableEmptySections
           dataSource={ this.dataSource }
@@ -77,6 +81,9 @@ mapStateToProps = state => {
     loading,
     error
   } = state.chat;
+
+  const { event } = state.events
+
   const messages = _.map(state.chat.messages, (val, uid) => {
     return { ...val, uid }
   });
@@ -85,7 +92,8 @@ mapStateToProps = state => {
     message,
     messages,
     user,
-    loading
+    loading,
+    eventId: state.events.event.uid
   };
 };
 

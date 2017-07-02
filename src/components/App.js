@@ -92,11 +92,6 @@ class App extends Component {
       tension: 10
     }).start();
   }
-  onEventPress() {
-    Actions.event({type: 'replace'});
-    this.props.imageLoading(false);
-  }
-
   onHomePress() {
     Actions.home({type: 'replace'});
     this.props.imageLoading(false);
@@ -117,7 +112,6 @@ class App extends Component {
 
   hideBar() {
     this.props.hideStatusBar(!this.props.hidden);
-    console.log(this.props.hidden);
   }
 
   togglePressed() {
@@ -190,7 +184,6 @@ class App extends Component {
           </Animated.View>
           <Router
             onPress={this.togglePressed.bind(this)}
-            onEventPress={this.onEventPress.bind(this)}
           />
       </Animated.View>
       </View>

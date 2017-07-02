@@ -15,9 +15,9 @@ export const chatChanged = text => {
   };
 };
 
-export const messageSent = ( message, { uid, email } ) => dispatch => {
+export const messageSent = ( eventId, message, { uid, email }) => dispatch => {
   dispatch({ type: LOADING_MESSAGE })
-  const ref = firebase.database().ref("messages").push().set({
+  const ref = firebase.database().ref("/Events/" + eventId + "/messages").push().set({
     message,
     email,
     user: uid
@@ -30,8 +30,8 @@ export const messageSent = ( message, { uid, email } ) => dispatch => {
   });
 }
 
-export const messageFetched = () => dispatch => {
-  firebase.database().ref("messages")
+export const messageFetched = eventId => dispatch => {
+  firebase.database().ref("/Events/" + eventId + "/messages")
     .on('value', snapshot => {
       dispatch({ type: MESSAGE_FETCH_SUCCESS, payload: snapshot.val() });
     });

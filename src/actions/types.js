@@ -16,3 +16,7 @@ export const MESSAGE_FETCH_SUCCESS = 'message_fetch_success';
 export const LOADING_MESSAGE = 'loading_message';
 export const MESSAGE_SENT = 'message_sent';
 export const MESSAGE_FAILED = 'message_failed';
+export const FETCHING_EVENTS = 'fetching_events';
+export const EVENTS_RECEIVED = 'events_received';
+export const EVENTS_FAILED = 'events_failed';
+export const GO_TO_EVENT = 'go_to_event';

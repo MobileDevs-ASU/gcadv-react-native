@@ -20,6 +20,7 @@ import {
 } from './types';
 
 export * from './chatActions';
+export * from './eventsActions';
 
 export const selectAbout = (aboutId) => {
   return {

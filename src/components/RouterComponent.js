@@ -24,7 +24,7 @@ const RouterComponent = (props) => {
           hideNavBar={true}
           passProps={true}
           onPress={props.onPress}
-          onEventPress={props.onEventPress}
+          initial
         />
 
         <Scene
@@ -33,7 +33,6 @@ const RouterComponent = (props) => {
           hideNavBar={true}
           passProps={true}
           onPress={props.onPress}
-          initial
         />
 
         <Scene
@@ -48,7 +47,6 @@ const RouterComponent = (props) => {
           component={ Chat }
           key="chat"
           hideNavBar={ true }
-          initial
         />
 
         <Scene
