@@ -20,14 +20,16 @@ const EventCard = (props) => {
   const {
     title,
     description,
-    image
+    image,
+    active
   } = props.event
   return (
     <View style={ styles.container }>
-      <Card style={{ flex: 1 }}>
+      <Card style={ styles.cardStyle}>
         <CardHeader
           eventTitle={title}
           eventDescription={description}
+          eventActive={active}
           onPress={props.onPress}
         />
         <CardImage
@@ -40,9 +42,17 @@ const EventCard = (props) => {
 
 const styles = {
   container: {
+    height: 300,
+    marginRight: 10,
+    marginLeft: 10,
+    marginBottom: 20,
+    marginTop: 20,
+  },
+  cardStyle: {
     flex: 1,
-    backgroundColor: 'red',
-    height: HEIGHT
+    shadowOffset: { width: 1, height: 1 },
+    shadowColor: '#000',
+    shadowOpacity: 0.7
   }
 }
 

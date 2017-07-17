@@ -31,14 +31,13 @@ const styles = {
   cardImageContainer: {
     flex: 1,
     height: 'auto',
-    shadowOpacity: 1,
-    shadowColor: 'black',
-    shadowOffset: { width: 1, height: 2 }
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    margin: 5
   },
   cardImage: {
     flex: 1,
-    width: Dimensions.get('window').width,
-    resizeMode: 'cover'
+    resizeMode: 'cover',
   },
   imageLabelStyle: {
     position: 'absolute',

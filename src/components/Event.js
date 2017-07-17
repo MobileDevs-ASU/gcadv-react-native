@@ -14,6 +14,7 @@ class Event extends Component {
   componentWillMount() {
     this.getPerformers();
   }
+
   getPerformers = () => {
     const performers = _.map(this.props.event.performers, (val, uid) => {
       return { ...val, uid };
@@ -46,7 +47,9 @@ class Event extends Component {
           />
         </Header>
         {this.getPerformers()}
-        <EventHeader event={this.props.event}/>
+        <EventHeader
+          event={this.props.event}
+        />
         <ListView
           enableEmptySections
           dataSource={ this.dataSource }

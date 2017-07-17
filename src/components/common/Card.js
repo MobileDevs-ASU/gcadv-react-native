@@ -10,19 +10,15 @@ const CARD_HEIGHT = Dimensions.get('window').height * .75;
 
 const Card = (props) => {
   return (
-    <LinearGradient
-     colors={['#987197', '#5b5ba1']}
-     style={{ ...styles.cardStyle, ...props.style }}
-     >
+    <View style={[ props.style, styles.cardStyle]}>
       { props.children }
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = {
   cardStyle: {
-    height: CARD_HEIGHT,
-    backgroundColor: 'transparent'
+    backgroundColor: 'white'
   }
 }
 

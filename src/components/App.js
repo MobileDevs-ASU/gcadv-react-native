@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
   StatusBar
 } from 'react-native';
-import { Components } from 'expo';
+import { Components, WebBrowser } from 'expo';
 const { BlurView } = Components;
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -104,10 +104,8 @@ class App extends Component {
     this.togglePressed()
   }
 
-  onDonatePress() {
-    Actions.donate({type: 'replace'});
-    this.props.imageLoading(false);
-    this.togglePressed()
+  onDonatePress = async() => {
+    await WebBrowser.openBrowserAsync('https://www.paypal.com/donate/?token=_aRndoYkuBAj51TxilHArBkKmVrZMok_jUYDMszXZ7ZLNqO9L7UoOmxNQSV6gmp_D-JarW');
   }
 
   hideBar() {

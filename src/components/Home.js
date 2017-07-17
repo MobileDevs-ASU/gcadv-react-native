@@ -4,10 +4,11 @@ import {
   Text,
   Image,
   TouchableWithoutFeedback,
-  ListView
+  ListView,
+  Dimensions
 } from 'react-native';
 import _ from 'lodash';
-import { LinearGradient, Components } from 'expo';
+import { Components } from 'expo';
  import { connect } from'react-redux'
  import { Actions } from 'react-native-router-flux';
 import {
@@ -21,10 +22,9 @@ import {
  } from './common';
  import { imageLoading, getEvents, goToEvent } from '../actions'
 
-
+const LISTVIEW_HEIGHT = Dimensions.get('window').height - 165
 import GCADVLogo from '../images/GCADV_logo.png';
 import EventImg from './../../assets/images/Event.jpg'
-
 
 class Home extends Component {
   componentWillMount() {
@@ -45,7 +45,7 @@ class Home extends Component {
 
   onPress = (event) => {
     this.props.goToEvent(event);
-    Actions.event({ type: 'replace' })
+    Actions.event({ type: 'replace' });
   }
 
   renderRows = (event) => {
@@ -73,11 +73,13 @@ class Home extends Component {
         <Header onPress={this.props.onPress}>
           <Image source={ GCADVLogo } style={ headerImageStyle } />
         </Header>
-        <ListView
-          enableEmptySections
-          dataSource={ this.dataSource }
-          renderRow={ this.renderRows }
-        />
+        <View style={{height: LISTVIEW_HEIGHT}}>
+          <ListView
+            enableEmptySections
+            dataSource={ this.dataSource }
+            renderRow={ this.renderRows }
+          />
+        </View>
         <Footer />
       </View>
     );
@@ -99,6 +101,9 @@ const styles = {
     fontSize: 20,
     color: '#f8f8f8',
     padding: 15
+  },
+  listViewStyle: {
+    height: 400
   }
 }
 

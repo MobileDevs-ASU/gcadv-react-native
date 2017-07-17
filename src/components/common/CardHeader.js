@@ -7,16 +7,39 @@ import {
 
 const CardHeader = (props) => {
 
+  renderButton = () => {
+    const {
+      eventButtonText,
+      eventButton
+    } = styles
+
+    onFalseAcitvePress = () => {
+      let eventTitle = props.eventTitle
+      alert("Sorry, " + { eventTitle } + " has passed.")
+    }
+
+    if (props.eventActive) {
+      return (
+        <TouchableOpacity style={eventButton} onPress={props.onPress}>
+          <Text style={eventButtonText}>View Event</Text>
+        </TouchableOpacity>
+      )
+    }else{
+      return (
+        <TouchableOpacity style={eventButton} onPress={this.onFalseAcitvePress.bind(this)}>
+          <Text style={eventButtonText}>Event passed</Text>
+        </TouchableOpacity>
+      )
+    }
+  }
+
   const {
     cardHeaderStyle,
     eventTitleStyle,
     eventDescriptionStyle,
     container,
     eventButtonContainer,
-    eventButtonText,
-    eventButton
    } = styles
-
   return (
     <View style={container}>
       <View style={ cardHeaderStyle }>
@@ -24,9 +47,7 @@ const CardHeader = (props) => {
         <Text style={ eventDescriptionStyle }>{ props.eventDescription }</Text>
       </View>
       <View style={eventButtonContainer}>
-        <TouchableOpacity style={eventButton} onPress={props.onPress}>
-          <Text style={eventButtonText}>View Event</Text>
-        </TouchableOpacity>
+        { this.renderButton() }
       </View>
     </View>
   );
@@ -35,44 +56,47 @@ const CardHeader = (props) => {
 const styles = {
   container: {
     height: 80,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#d8d8d8',
+    shadowOffset: { width: 0, height: 1},
+    shadowColor: '#f8f8f8',
+    shadowOpacity: 0.5
   },
   eventButtonContainer: {
     flex: 1,
     alignItems: 'flex-end',
     justifyContent: 'center',
-    padding: 15,
-    shadowOpacity: 1,
-    shadowColor: 'black',
-    shadowOffset: { width: 1, height: 1 },
+    padding: 15
   },
   eventButton: {
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#a8a8a8',
     borderRadius: 5,
-    padding: 7.5
+    padding: 7.5,
+    backgroundColor: '#a8a8a8'
   },
   cardHeaderStyle: {
     justifyContent: 'space-around',
     paddingLeft: 20,
     paddingTop: 15,
     paddingBottom: 15,
-    shadowOpacity: 1,
-    shadowColor: 'black',
-    shadowOffset: { width: 1, height: 1 },
     elevation: 3,
     flex: 1
   },
   eventTitleStyle: {
     fontSize: 24,
-    color: '#fff',
+    fontFamily: 'Avenir Next Condensed',
+    color: '#a8a8a8',
   },
   eventDescriptionStyle: {
-    color: '#fff',
+    color: '#a8a8a8',
+    fontFamily: 'Avenir Next',
     fontSize: 16,
   },
   eventButtonText: {
-    color: '#fff',
+    color: 'white',
+    fontFamily: 'Avenir Next',
     fontSize: 15,
   }
 }
