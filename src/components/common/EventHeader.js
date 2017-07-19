@@ -46,6 +46,12 @@ const EventHeader = (props) => {
           style={gradientStyle}
         >
           <Image style={{height: 177, flex: 1, }} source={{uri: venueImage.val}} />
+          <BlurView
+            intensity={30}
+            tint="default"
+            style={{ position: 'absolute', height: 177, width: SCREEN_WIDTH, top: 0, right: 0 }}
+          >
+          </BlurView>
       </LinearGradient>
     )
   }
@@ -59,7 +65,8 @@ const EventHeader = (props) => {
     timeStyle,
     blurViewStyle,
     container,
-    messageIconStyle
+    messageIconStyle,
+    innerTextContainer
   } = styles;
   const {
     time,
@@ -80,14 +87,10 @@ const EventHeader = (props) => {
         >
         </ListView>
       </View>
-      <View style={{position: 'absolute', backgroundColor: 'transparent', height: 177, width: SCREEN_WIDTH * 0.8, backgroundColor: 'red'}}>
-        <BlurView
-          tint="default"
-          intensity={60}
-          style={blurViewStyle}
-        >
-          <Text>Test</Text>
-        </BlurView>
+      <View style={ innerTextContainer }>
+        <Text style={titleStyle}>{ title }</Text>
+        <Text style={ timeStyle }>{ address }</Text>
+        <Text style={ timeStyle }>{ time }</Text>
       </View>
     </View>
   )
@@ -105,16 +108,14 @@ const styles = {
   gradientStyle: {
     flex: 1
   },
-  textContainer: {
-    backgroundColor: 'transparent',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
   titleStyle: {
     fontSize: 24,
-    fontFamily: 'Avenir Next',
+    fontFamily: 'Avenir Next Condensed',
     marginTop: 10,
-    color: '#a8a8a8',
+    textAlign: 'center',
+    color: 'white',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowColor: '#000'
   },
   descriptionStyle: {
     fontSize: 18,
@@ -125,9 +126,9 @@ const styles = {
   },
   timeStyle: {
     fontSize: 18,
-    color: '#a8a8a8',
+    color: 'white',
     textAlign: 'center',
-    fontFamily: 'Avenir Next',
+    fontFamily: 'Avenir Next Condensed',
   },
   blurViewStyle: {
     alignSelf: 'center',
@@ -143,7 +144,15 @@ const styles = {
     bottom: 2.5,
     right: 7.5,
     zIndex: 999
-  }
+  },
+  innerTextContainer: {
+    position: 'absolute',
+    backgroundColor: 'transparent',
+    justifyContent: 'space-around',
+    alignSelf: 'center',
+    height: 177,
+    width: SCREEN_WIDTH * 0.8
+  },
 }
 
 export { EventHeader }

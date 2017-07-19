@@ -6,6 +6,7 @@ import ImageReducer from './ImageReducer';
 import StatusBarReducer from './statusBarReducer';
 import LoginReducer from './LoginReducer';
 import ChatReducer from './ChatReducer';
+import trainingReducer from './trainingReducer';
 
 export default combineReducers({
   selectedAboutId: SelectionReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   image: ImageReducer,
   statusBar: StatusBarReducer,
   login: LoginReducer,
-  chat: ChatReducer
+  chat: ChatReducer,
+  training: trainingReducer
 });

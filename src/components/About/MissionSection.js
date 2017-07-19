@@ -11,8 +11,8 @@ const MissionSection = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <DescriptiveImage />
-        <DescriptiveImage />
+        <DescriptiveImage onPress={props.onPress}/>
+        <DescriptiveImage onPress={props.onPress}/>
       </View>
     </View>
   );

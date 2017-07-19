@@ -2,7 +2,8 @@ import React from 'react';
 import {
   View,
   Text,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import houseImg from '../../images/house.png'
 
@@ -13,14 +14,15 @@ const DescriptiveImage = (props) => {
     textStyle
   } = styles
   return (
-    <View style={container}>
-      <Image
-        source={houseImg}
-        style={imageStyle}
-      />
-      <Text style={textStyle}>Advocate</Text>
-    </View>
-
+    <TouchableOpacity onPress={props.onPress}>
+      <View style={container}>
+        <Image
+          source={houseImg}
+          style={imageStyle}
+        />
+        <Text style={textStyle}>Advocate</Text>
+      </View>
+    </TouchableOpacity>
   )
 }
 
@@ -37,7 +39,7 @@ const styles = {
   },
   textStyle: {
     fontSize: 18,
-    fontFamily: 'Helvetica Neue',
+    fontFamily: 'Avenir Next Condensed',
     color: '#979797',
     paddingTop: 10,
     textAlign: 'center'

@@ -21,6 +21,7 @@ import {
 
 export * from './chatActions';
 export * from './eventsActions';
+export * from './trainingActions';
 
 export const selectAbout = (aboutId) => {
   return {

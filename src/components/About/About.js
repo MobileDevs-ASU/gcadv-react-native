@@ -17,6 +17,7 @@ import {
   Header,
   Letter,
   Seperator,
+  Modal
 } from './../common'
 import Expo, { Components, Assets } from 'expo';
 const { LinearGradient } = Components
@@ -33,98 +34,69 @@ class About extends Component {
 
   constructor(props) {
     super(props);
-    this.scrollY = new Animated.Value(0)
+    this.position = new Animated.Value(-SCREEN_HEIGHT);
+    this.opacity = new Animated.Value(0);
   }
 
-  getFirstFontSize() {
-    const fontSize = this.scrollY.interpolate({
-      inputRange: [-100, -50, 0, 12000],
-      outputRange: [72, 56, 48, 36]
-    });
-
-    const opacity = this.scrollY.interpolate({
-      inputRange: [-100, -50, 0, 100, 200],
-      outputRange: [1, .95, .9, .4, .1]
-    });
-
-    return {
-      fontSize,
-      opacity
-    }
+  onButtonPressed = () => {
+    Animated.sequence([
+      Animated.timing(this.position, {
+        toValue: 0,
+        duration: 750
+      }),
+      Animated.timing(this.opacity, {
+        toValue: 1,
+        duration: 400
+      })
+    ]).start();
   }
 
-  getSecondFontSize() {
-    const fontSize = this.scrollY.interpolate({
-      inputRange: [-100, -50, 0, 12000],
-      outputRange: [36, 28, 24, 18]
-    });
-
-    const opacity = this.scrollY.interpolate({
-      inputRange: [-100, -50, 0, 100, 200],
-      outputRange: [1, .95, .9, .4, .1]
-    });
-
-    return {
-      fontSize,
-      opacity
-    }
-  }
-
-  hideBar() {
-    console.log(this.scrollY);
-    // if(this.scrollY > 100) {
-    //   console.log('test')
-    //   this.props.hideStatusBar(true);
-    // }else{
-    //   this.props.hideStatusBar(false);
-    // }
+  exitPressed = () => {
+    Animated.sequence([
+      Animated.timing(this.opacity, {
+        toValue: 0,
+        duration: 400
+      }),
+      Animated.timing(this.position, {
+        toValue: -SCREEN_HEIGHT,
+        duration: 750
+      })
+    ]).start();
   }
 
   render() {
-
+    console.log("Position: ", this.position)
     return (
-      <View style={StyleSheet.absoluteFill}>
+      <View style={{ flex: 1 }}>
         <StatusBar
            barStyle="light-content"
            hidden={this.props.hidden}
          />
-        <LinearGradient
-          colors={['#fff', '#f8f8f8']}
-          style={{position: 'absolute', width: SCREEN_WIDTH, height: SCREEN_HEIGHT, zIndex: 1, opacity: .125}}
+        <AboutHeader
+          style={styles.headerText}
         />
-        <CardImage
-          source={{uri: HeaderImg}}
-          style={{position: 'absolute', height: SCREEN_HEIGHT, width: SCREEN_WIDTH}}
-        >
-          <AboutHeader
-            style={styles.headerText}
-            secondFontSize={this.getSecondFontSize()}
-            firstFontSize={this.getFirstFontSize()}
-          />
-        </CardImage>
         <ScrollView
           bounces={true}
           alwaysBounceVertical={false}
           style={styles.scrollViewStyle}
-          onScroll={Animated.event([{
-              nativeEvent: {
-                contentOffset: {y: this.scrollY}
-              }
-            }])}
           scrollEventThrottle={20}
         >
-        <View style={{height: 160, backgroundColor: 'transparent'}}>
-        </View>
-        <LinearGradient
-          colors={['#4A4A4A', '#000']}
-          style={styles.bodyStyle}
-        >
-          <Text style={styles.groupHeaderStyle}>Our Mission</Text>
-          <Seperator />
-          <Mission />
+        <View style={styles.bodyStyle}>
+          <View style={styles.missionStyle}>
+            <Text style={styles.groupHeaderStyle}>Our Mission</Text>
+            <Seperator />
+            <Mission
+              onButtonPressed={this.onButtonPressed.bind(this)}
+            />
+          </View>
           <AboutSupport />
-        </LinearGradient>
+        </View>
         </ScrollView>
+        <Modal
+          style={{top: this.position}}
+          opacity={{opacity: this.opacity}}
+          exitPressed={this.exitPressed.bind(this)}
+        />
       </View>
     )
   }
@@ -141,7 +113,8 @@ const styles = {
     textAlign: 'center',
     fontSize: 24,
     color: '#9B9B9B',
-    padding: 20
+    padding: 20,
+    fontFamily: 'Avenir Next'
   },
   descriptionText: {
     fontSize: 48,
@@ -149,8 +122,6 @@ const styles = {
     margin: 20
   },
   headerText: {
-    backgroundColor: 'transparent',
-    paddingTop: 30,
     shadowOffset: {width: 1, height: 1},
     shadowColor: '#000',
     shadowOpacity: .8
@@ -158,6 +129,10 @@ const styles = {
   scrollViewStyle: {
     flex: 1,
     zIndex: 2,
+  },
+  missionStyle: {
+    backgroundColor: '#f8f8f8',
+    paddingBottom: 20
   }
 }
 

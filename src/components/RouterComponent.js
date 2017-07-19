@@ -6,6 +6,7 @@ import Donate from './Donate'
 import Event from './Event'
 import Login from './Login'
 import Chat from './Chat';
+import Training from './Training';
 
 const RouterComponent = (props) => {
   return (
@@ -46,6 +47,12 @@ const RouterComponent = (props) => {
         <Scene
           component={ Chat }
           key="chat"
+          hideNavBar={ true }
+        />
+
+        <Scene
+          component={ Training }
+          key="training"
           hideNavBar={ true }
         />
 

@@ -104,6 +104,12 @@ class App extends Component {
     this.togglePressed()
   }
 
+  onTrainingPress() {
+    Actions.training({ type: 'replace' });
+    this.props.imageLoading(false);
+    this.togglePressed();
+  }
+
   onDonatePress = async() => {
     await WebBrowser.openBrowserAsync('https://www.paypal.com/donate/?token=_aRndoYkuBAj51TxilHArBkKmVrZMok_jUYDMszXZ7ZLNqO9L7UoOmxNQSV6gmp_D-JarW');
   }
@@ -166,6 +172,7 @@ class App extends Component {
           onAboutPress={this.onAboutPress.bind(this)}
           onHomePress={this.onHomePress.bind(this)}
           onDonatePress={this.onDonatePress.bind(this)}
+          onTrainingPress={this.onTrainingPress.bind(this)}
         />
         <Animated.View
           style={{...this.position.getLayout(), ...{flex: 1}}}

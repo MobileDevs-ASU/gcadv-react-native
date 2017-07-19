@@ -18,3 +18,5 @@ export * from './MessageBox';
 export * from './Message';
 export * from './EventCard';
 export * from './Performer';
+export * from './TrainingCard';
+export * from './Modal';

@@ -20,3 +20,4 @@ export const FETCHING_EVENTS = 'fetching_events';
 export const EVENTS_RECEIVED = 'events_received';
 export const EVENTS_FAILED = 'events_failed';
 export const GO_TO_EVENT = 'go_to_event';
+export const TRAININGS_RECEIVED = 'trainings_received'

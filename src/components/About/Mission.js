@@ -7,8 +7,8 @@ import MissionSection from './MissionSection'
 const Mission = (props) => {
   return (
     <View style={styles.container}>
-      <MissionSection />
-      <MissionSection />
+      <MissionSection onPress={props.onButtonPressed}/>
+      <MissionSection onPress={props.onButtonPressed}/>
     </View>
   );
 };

@@ -111,6 +111,7 @@ const mapStateToProps = state => {
   const events = _.map(state.events.events, (val, uid) => {
     return { ...val, uid };
   });
+  console.log(events)
   return {
     events,
     image: state.image

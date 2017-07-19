@@ -22,10 +22,10 @@ const Letter = (props) => {
     return (
       <View style={container}>
         <View>
-          <Animated.Text style={[firstLetterStyle, props.firstFontSize]}>{firstLetter}</Animated.Text>
+          <Text style={[firstLetterStyle, props.firstFontSize]}>{firstLetter}</Text>
         </View>
-        <View style={{justifyContent: 'flex-end', paddingBottom: 7.5}}>
-          <Animated.Text style={[endingStyle, props.secondFontSize]}>{ending}</Animated.Text>
+        <View style={{justifyContent: 'flex-end', paddingBottom: 2.5}}>
+          <Text style={[endingStyle, props.secondFontSize]}>{ending}</Text>
         </View>
       </View>
     )
@@ -45,20 +45,15 @@ const styles = {
     marginLeft: 10,
   },
   firstLetterStyle: {
-    fontSize: 48,
+    fontSize: 28,
     color: '#fff',
-    opacity: 0.9,
-    shadowOffset: {width: 0, height: 1},
-    shadowColor: 'black',
-    shadowOpacity: 0.7
+    alignSelf: 'flex-end',
+    fontFamily: 'Avenir Next'
   },
   endingStyle: {
     fontSize: 24,
     color: '#fff',
-    opacity: 0.9,
-    shadowOffset: {width: 0, height: 1},
-    shadowColor: 'black',
-    shadowOpacity: 0.7
+    fontFamily: 'Avenir Next'
   }
 }
 

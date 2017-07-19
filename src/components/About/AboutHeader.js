@@ -6,9 +6,13 @@ import {
 import { Letter } from './../common'
 
 const AboutHeader = (props) => {
+
+  const {
+    container
+  } = styles
   return (
     <Animated.View style={props.style}>
-    <View style={{alignItems: 'center'}}>
+    <View style={container}>
       <View style={{ flexDirection: 'row'}}>
         <Letter
           firstFontSize={props.firstFontSize}
@@ -41,6 +45,15 @@ const AboutHeader = (props) => {
     </View>
     </Animated.View>
   );
+}
+
+const styles = {
+  container: {
+    backgroundColor: '#4a4a4a',
+    height: 120,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 }
 
 export default AboutHeader;

@@ -63,6 +63,11 @@ class Drawer extends Component {
           />
 
           <NavigationButton
+            title="Training"
+            onPress={this.props.onTrainingPress}
+          />
+
+          <NavigationButton
             title="About Us"
             onPress={this.props.onAboutPress}
           />
