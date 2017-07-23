@@ -7,6 +7,9 @@ import StatusBarReducer from './statusBarReducer';
 import LoginReducer from './LoginReducer';
 import ChatReducer from './ChatReducer';
 import trainingReducer from './trainingReducer';
+import missionReducer from './missionReducer';
+import missionSelectedReducer from './missionSelectedReducer';
+import onBoardingReducer from './onBoardingReducer';
 
 export default combineReducers({
   selectedAboutId: SelectionReducer,
@@ -16,5 +19,8 @@ export default combineReducers({
   statusBar: StatusBarReducer,
   login: LoginReducer,
   chat: ChatReducer,
-  training: trainingReducer
+  training: trainingReducer,
+  mission: missionReducer,
+  selectedMission: missionSelectedReducer,
+  onBoarding: onBoardingReducer
 });

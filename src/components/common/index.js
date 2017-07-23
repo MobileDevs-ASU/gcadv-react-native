@@ -20,3 +20,4 @@ export * from './EventCard';
 export * from './Performer';
 export * from './TrainingCard';
 export * from './Modal';
+export * from './RegisterHeader';

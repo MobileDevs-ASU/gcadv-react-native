@@ -22,6 +22,8 @@ import {
 export * from './chatActions';
 export * from './eventsActions';
 export * from './trainingActions';
+export * from './aboutActions';
+export * from './onBoardingAction';
 
 export const selectAbout = (aboutId) => {
   return {
@@ -89,22 +91,28 @@ export const loginUser = ({email, password}) =>  async dispatch => {
       .then(user => {
         loginUserSucess(dispatch, user);
       })
-      .catch(() => {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then(user => {
-            loginUserSucess(dispatch, user)
-          })
-          .catch(() => loginUserFailed(dispatch));
-      });
+      .catch(() => loginUserFailed(dispatch));
   };
 };
+
+export const createUser = ({ email, password, confirmPassword }) => async dispatch => {
+  if (password === confirmPassword) {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        loginUserSucess(dispatch, user)
+      }).catch(() => loginUserFailed(dispatch));
+  }else{
+    loginUserFailed(dispatch);
+  }
+
+}
 
 const loginUserSucess = (dispatch, user) => {
   dispatch({
     type: LOGIN_USER_SUCESS,
     payload: user
   });
-  Actions.main();
+  Actions.main({ type: 'replace' });
 };
 
 const loginUserFailed = (dispatch) => {

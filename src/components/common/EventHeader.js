@@ -66,7 +66,8 @@ const EventHeader = (props) => {
     blurViewStyle,
     container,
     messageIconStyle,
-    innerTextContainer
+    innerTextContainer,
+    messageIconContainerStyle
   } = styles;
   const {
     time,
@@ -92,6 +93,12 @@ const EventHeader = (props) => {
         <Text style={ timeStyle }>{ address }</Text>
         <Text style={ timeStyle }>{ time }</Text>
       </View>
+      <TouchableOpacity
+        style={ messageIconContainerStyle }
+        onPress={ this.onPress.bind(this) }
+      >
+        <Image source={messageIcon} style={ messageIconStyle }/>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -104,6 +111,11 @@ const styles = {
     width: Dimensions.get('window').width,
     resizeMode: 'cover',
     flex: 1
+  },
+  messageIconContainerStyle: {
+    position: 'absolute',
+    bottom: 5,
+    right: 5
   },
   gradientStyle: {
     flex: 1

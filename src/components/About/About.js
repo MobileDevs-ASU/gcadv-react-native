@@ -20,8 +20,9 @@ import {
   Modal
 } from './../common'
 import Expo, { Components, Assets } from 'expo';
-const { LinearGradient } = Components
-import { hideStatusBar } from '../../actions'
+const { LinearGradient } = Components;
+import _ from 'lodash';
+import { hideStatusBar, missionClosed } from '../../actions'
 import AboutHeader from './AboutHeader';
 import Mission from './Mission';
 import AboutSupport from './AboutSupport'
@@ -38,34 +39,33 @@ class About extends Component {
     this.opacity = new Animated.Value(0);
   }
 
-  onButtonPressed = () => {
-    Animated.sequence([
-      Animated.timing(this.position, {
-        toValue: 0,
-        duration: 750
-      }),
-      Animated.timing(this.opacity, {
-        toValue: 1,
-        duration: 400
-      })
-    ]).start();
-  }
-
-  exitPressed = () => {
-    Animated.sequence([
-      Animated.timing(this.opacity, {
-        toValue: 0,
-        duration: 400
-      }),
-      Animated.timing(this.position, {
-        toValue: -SCREEN_HEIGHT,
-        duration: 750
-      })
-    ]).start();
+  presentModal = () => {
+    if (this.props.showModal) {
+      Animated.sequence([
+        Animated.timing(this.position, {
+          toValue: 0,
+          duration: 750
+        }),
+        Animated.timing(this.opacity, {
+          toValue: 1,
+          duration: 650
+        })
+      ]).start();
+    }else{
+      Animated.sequence([
+        Animated.timing(this.opacity, {
+          toValue: 0,
+          duration: 400
+        }),
+        Animated.timing(this.position, {
+          toValue: -SCREEN_HEIGHT,
+          duration: 750
+        })
+      ]).start();
+    }
   }
 
   render() {
-    console.log("Position: ", this.position)
     return (
       <View style={{ flex: 1 }}>
         <StatusBar
@@ -86,16 +86,18 @@ class About extends Component {
             <Text style={styles.groupHeaderStyle}>Our Mission</Text>
             <Seperator />
             <Mission
-              onButtonPressed={this.onButtonPressed.bind(this)}
+              mission={this.props.missions}
             />
           </View>
           <AboutSupport />
         </View>
         </ScrollView>
+        {this.presentModal()}
         <Modal
           style={{top: this.position}}
+          info={ this.props.selectedMission }
           opacity={{opacity: this.opacity}}
-          exitPressed={this.exitPressed.bind(this)}
+          exitPressed={() => this.props.missionClosed()}
         />
       </View>
     )
@@ -138,9 +140,16 @@ const styles = {
 
 const mapStateToProps = state => {
   const { hidden } = state.statusBar
-  return { hidden }
+  const { mission } = state
+  const { selectedMission } = state.selectedMission
+
+  const showModal = selectedMission ? true : false;
+  const missions = _.map(mission, (val, uid) => {
+    return { val, uid, selectedMission, showModal }
+  })
+  return { hidden, missions, selectedMission, showModal }
 }
 
 
 
-export default connect(mapStateToProps, {hideStatusBar})(About);
+export default connect(mapStateToProps, { hideStatusBar, missionClosed })(About);

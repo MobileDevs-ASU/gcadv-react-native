@@ -7,14 +7,24 @@ import Event from './Event'
 import Login from './Login'
 import Chat from './Chat';
 import Training from './Training';
+import OnBoarding from './OnBoarding';
+import SignUp from './SignUp';
 
 const RouterComponent = (props) => {
   return (
     <Router>
       <Scene hideNavBar={true} key="onboarding" initial>
         <Scene
+          key="onBoarding"
+          component={ OnBoarding }
+        />
+        <Scene
           key="login"
           component={ Login }
+        />
+        <Scene
+          key="signUp"
+          component={ SignUp }
         />
       </Scene>
 

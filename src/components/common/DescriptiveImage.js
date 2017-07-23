@@ -20,7 +20,7 @@ const DescriptiveImage = (props) => {
           source={houseImg}
           style={imageStyle}
         />
-        <Text style={textStyle}>Advocate</Text>
+        <Text style={textStyle}>{props.info.title}</Text>
       </View>
     </TouchableOpacity>
   )

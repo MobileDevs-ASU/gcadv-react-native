@@ -15,7 +15,7 @@ const CardHeader = (props) => {
 
     onFalseAcitvePress = () => {
       let eventTitle = props.eventTitle
-      alert("Sorry, " + { eventTitle } + " has passed.")
+      alert(`Sorry the event, ${eventTitle}, has passed`);
     }
 
     if (props.eventActive) {

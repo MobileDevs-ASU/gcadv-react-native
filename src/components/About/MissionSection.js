@@ -3,16 +3,30 @@ import {
   View,
   Text
 } from 'react-native';
+import { connect } from 'react-redux';
 import {
   DescriptiveImage
 } from './../common'
+import { missionSelected } from './../../actions'
 
 const MissionSection = (props) => {
+
+  renderDescriptiveImage = () => {
+    return props.info.map(({val, uid}) => {
+      console.log("Value: ", val)
+      return (
+        <DescriptiveImage
+          key={ uid }
+          info={ val }
+          onPress={ props.missionSelected.bind(this, val) }
+        />
+      )
+    })
+  }
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <DescriptiveImage onPress={props.onPress}/>
-        <DescriptiveImage onPress={props.onPress}/>
+        {this.renderDescriptiveImage()}
       </View>
     </View>
   );
@@ -32,4 +46,4 @@ const styles = {
   }
 }
 
-export default MissionSection;
+export default connect(null, { missionSelected })(MissionSection);

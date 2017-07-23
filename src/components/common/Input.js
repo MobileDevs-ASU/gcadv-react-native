@@ -40,11 +40,15 @@ const styles = {
     borderWidth: 1,
     borderColor: '#f8f8f8',
     borderRadius: 5,
-    padding: 10
+    padding: 10,
+    fontFamily: 'Avenir Next'
   },
   textStyle: {
-    fontSize: 18,
-    paddingLeft: 5
+    fontSize: 20,
+    paddingLeft: 5,
+    fontFamily: 'Avenir Next Condensed',
+    fontWeight: '100',
+    color: '#4a4a4a'
   }
 }
 

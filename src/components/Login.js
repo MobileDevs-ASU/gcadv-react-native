@@ -4,12 +4,14 @@ import {
   Text,
   Dimensions,
   Image,
-  AsyncStorage
+  AsyncStorage,
+  TouchableOpacity
 } from 'react-native';
 import {
   Input,
   Button,
-  Spinner
+  Spinner,
+  RegisterHeader
 } from './common';
 import { Actions } from 'react-native-router-flux'
 import * as firebase from 'firebase';
@@ -31,6 +33,14 @@ class Login extends Component {
     this.props.loginUser({ email, password });
   }
 
+  createAccountDidTapped = () => {
+    Actions.signUp({ type: 'replace' });
+  }
+
+  onBackPressed = () => {
+    Actions.pop();
+  }
+
   async componentDidMount() {
     try {
       const value = await AsyncStorage.getAllKeys();
@@ -42,17 +52,13 @@ class Login extends Component {
     }
   }
 
-  facebookBtnPressed = () => {
-    this.props.facebookLogin();
-  }
-
   renderButton = () => {
     if (this.props.loading) {
       return <Spinner size="large" />
     }else{
       return (
         <Button
-          title="Login / Sign Up"
+          title="Login"
           style={styles.buttonWidth}
           onPress={this.buttonPressed.bind(this)}
         />
@@ -66,13 +72,20 @@ class Login extends Component {
       headerText,
       buttonWidth,
       headerStyle,
-      iconStyle
+      iconStyle,
+      backButtonContainer,
+      buttonTextStyle,
+      backText
     } = styles
     this.props.getEvents();
     return (
       <View style={{flex: 1}}>
+        <RegisterHeader
+          title="Login"
+          rightText="Sign Up"
+          onPress={this.createAccountDidTapped.bind(this)}
+        />
         <View style={container}>
-          <Text style={headerText}>Login</Text>
           <Image source={Icon} style={iconStyle}/>
           <Input
             title="Email"
@@ -82,7 +95,7 @@ class Login extends Component {
             keyboardType='email-address'
           />
           <Input
-            title="password"
+            title="Password"
             placeholder="password123"
             onChangeText={(text) => this.props.passwordChangedText(text)}
             value={this.props.password}
@@ -90,11 +103,6 @@ class Login extends Component {
             secureTextEntry
           />
           { this.renderButton() }
-          <Button
-            title="Login with Facebook"
-            style={buttonWidth}
-            onPress={this.facebookBtnPressed.bind(this)}
-          />
         </View>
         <Text>{this.props.error}</Text>
       </View>
@@ -112,6 +120,9 @@ const styles = {
   headerText: {
     textAlign: 'center',
     fontSize: 24,
+    fontFamily: 'Avenir Next Condensed',
+    fontWeight: '400',
+    color: '#4A4A4A'
   },
   buttonWidth: {
     width: Dimensions.get('window').width * 0.8
@@ -126,6 +137,17 @@ const styles = {
     height: 60,
     width: 60,
     margin: 20
+  },
+  backButtonContainer: {
+    margin: 10
+  },
+  buttonTextStyle: {
+    fontFamily: 'Avenir Next',
+    color: '#4A4A4A'
+  },
+  backText: {
+    color: '#4A4A4A',
+    fontFamily: 'Avenir Next',
   }
 };
 

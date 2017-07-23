@@ -27,13 +27,11 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.point = 0;
     this.position = new Animated.ValueXY();
-    console.log(this.position)
     const panResponder = PanResponder.create({
       onMoveShouldSetResponderCapture: () => true,
       onMoveShouldSetPanResponderCapture: (event, gesture) => {
-        if (Math.abs(gesture.dx) > 50) {
+        if (Math.abs(gesture.dx) > 50 && this.props.user) {
             return true;
         }
         return false;
@@ -199,11 +197,13 @@ class App extends Component {
 mapStateToProps = state => {
   const { open } = state.drawer;
   const { hidden } = state.statusBar;
+  const { user } = state.login
   const toValue = open ? 300 : 0;
   return {
     open,
     toValue,
-    hidden
+    hidden,
+    user
   }
 }
 
