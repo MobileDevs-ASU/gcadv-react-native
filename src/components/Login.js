@@ -115,7 +115,7 @@ const styles = {
     flex: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 50,
+    marginBottom: 135,
   },
   headerText: {
     textAlign: 'center',

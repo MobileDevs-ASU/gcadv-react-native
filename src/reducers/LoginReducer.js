@@ -5,9 +5,15 @@ import {
   LOGIN_USER_FAILED,
   LOGIN_USER,
   FACEBOOK_LOGIN_SUCCESS,
-  FACEBOOK_LOGIN_FAILED
+  FACEBOOK_LOGIN_FAILED,
+  CREATE_EMAIL_ENTERED,
+  CREATE_PASSWORD_ENTERED,
+  CREATE_CONFIRM_PASSWORD_ENTERED
 } from '../actions/types';
 const INITIAL_STATE = {
+  createConfirmPassword: '',
+  createEmail: '',
+  createPassword: '',
   email: '',
   password: '',
   user: null,
@@ -32,6 +38,12 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, token: action.payload}
     case FACEBOOK_LOGIN_FAILED:
       return { ...state, token: null}
+    case CREATE_EMAIL_ENTERED:
+      return { ...state, createEmail: action.payload };
+    case CREATE_PASSWORD_ENTERED:
+      return { ...state, createPassword: action.payload };
+    case CREATE_CONFIRM_PASSWORD_ENTERED:
+      return { ...state, createConfirmPassword: action.payload };
     default:
       return state;
   }

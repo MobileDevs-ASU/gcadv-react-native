@@ -11,11 +11,7 @@ import Email from './../images/email_icon.png';
 class LoginSignUp extends Component {
 
   signInDidTapped = () => {
-    Actions.login();
-  }
-
-  signUpDidTapped = () => {
-    Actions.signUp();
+    Actions.login({ type: 'push' });
   }
 
   render() {
@@ -38,8 +34,6 @@ class LoginSignUp extends Component {
         <View style={buttonContainer}>
           <TouchableOpacity onPress={ this.signInDidTapped.bind(this) }>
             <Text style={titleText}>Sign In</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={ this.signUpDidTapped.bind(this) }>
             <Text style={titleText}>Create An Account</Text>
           </TouchableOpacity>
         </View>

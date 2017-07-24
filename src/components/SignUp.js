@@ -3,7 +3,8 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  Image
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -13,6 +14,14 @@ import {
   Spinner,
   RegisterHeader
 } from './common';
+import{
+  createEmailChanged,
+  createPasswordChanged,
+  createConfirmPasswordChanged,
+  createUser
+} from './../actions';
+
+import Icon from './../images.GCADV_logo.png';
 
 class SignUp extends Component {
 
@@ -31,7 +40,8 @@ class SignUp extends Component {
       backButtonText,
       leftControlContainer,
       centerControlContainer,
-      signUpText
+      signUpText,
+      iconStyle
     } = styles
     return (
       <View style={{flex: 1}}>
@@ -41,26 +51,37 @@ class SignUp extends Component {
           onPress={ this.onLoginDidTapped.bind(this) }
         />
         <View style={innerContainer}>
+          <Image
+            source={Icon}
+            style={iconStyle}
+          />
           <Input
             title="Email"
             placeholder="joesmith@gmail.com"
             keyboardType='email-address'
+            value={this.props.email}
+            onChangeText={(text) => this.props.createEmailChanged(text)}
           />
           <Input
             title="Password"
             placeholder="password123"
             keyboardType='default'
+            value={this.props.password}
+            onChangeText={(text) => this.props.createPasswordChanged(text)}
             secureTextEntry
           />
           <Input
             title="Confirm Password"
             placeholder="password123 again"
             keyboardType='default'
+            value={this.props.confirmPassword}
+            onChangeText={(text) => this.props.createConfirmPasswordChanged(text)}
             secureTextEntry
           />
           <Button
             title="Sign Up"
             style={styles.buttonWidth}
+            onPress={this.props.createUser.bind(this, this.props)}
           />
         </View>
       </View>
@@ -73,10 +94,30 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 75
   },
   buttonWidth: {
     width: Dimensions.get('window').width * 0.8
+  },
+  iconStyle: {
+    height: 60,
+    width: 60,
+    margin: 20
+  },
+}
+
+mapStateToProps = state => {
+  const { createEmail, createPassword, createConfirmPassword } = state.login;
+  return {
+    email: createEmail,
+    password: createPassword,
+    confirmPassword: createConfirmPassword
   }
 }
 
-export default connect()(SignUp);
+export default connect(mapStateToProps, {
+  createEmailChanged,
+  createPasswordChanged,
+  createConfirmPasswordChanged,
+  createUser
+})(SignUp);

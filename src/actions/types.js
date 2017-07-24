@@ -24,3 +24,6 @@ export const TRAININGS_RECEIVED = 'trainings_received';
 export const MISSION_SELECTED = 'mission_selected';
 export const MISSION_CLOSED = 'mission_closed';
 export const SET_PAGE = 'set_page';
+export const CREATE_EMAIL_ENTERED = 'create_email_entered';
+export const CREATE_PASSWORD_ENTERED = 'create_password_entered';
+export const CREATE_CONFIRM_PASSWORD_ENTERED = 'create_confirm_password_entered';

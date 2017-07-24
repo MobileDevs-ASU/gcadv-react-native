@@ -24,6 +24,7 @@ export * from './eventsActions';
 export * from './trainingActions';
 export * from './aboutActions';
 export * from './onBoardingAction';
+export * from './createAccountActions';
 
 export const selectAbout = (aboutId) => {
   return {
@@ -89,7 +90,7 @@ export const loginUser = ({email, password}) =>  async dispatch => {
     dispatch({type: LOGIN_USER});
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => {
-        loginUserSucess(dispatch, user);
+        loginUserSuccess(dispatch, user);
       })
       .catch(() => loginUserFailed(dispatch));
   };
@@ -99,15 +100,15 @@ export const createUser = ({ email, password, confirmPassword }) => async dispat
   if (password === confirmPassword) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(user => {
-        loginUserSucess(dispatch, user)
-      }).catch(() => loginUserFailed(dispatch));
+        loginUserSuccess(dispatch, user)
+      })
+      .catch(() => loginUserFailed(dispatch));
   }else{
     loginUserFailed(dispatch);
   }
-
 }
 
-const loginUserSucess = (dispatch, user) => {
+const loginUserSuccess = (dispatch, user) => {
   dispatch({
     type: LOGIN_USER_SUCESS,
     payload: user

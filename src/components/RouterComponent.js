@@ -20,10 +20,12 @@ const RouterComponent = (props) => {
         />
         <Scene
           key="login"
+          animation="fade"
           component={ Login }
         />
         <Scene
           key="signUp"
+          animation="fade"
           component={ SignUp }
         />
       </Scene>
