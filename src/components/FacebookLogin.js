@@ -41,7 +41,6 @@ class FacebookLogin extends Component {
         <View>
           <Text style={moveOnText}>Scroll over to Sign in with Email</Text>
         </View>
-
       </View>
     )
   }

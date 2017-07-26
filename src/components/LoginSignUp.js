@@ -28,14 +28,13 @@ class LoginSignUp extends Component {
       <View style={container}>
         <View style={innerContainer}>
           <View style={imageContainer}>
-            <Image source={Email} style={imageStyle} />
+            <TouchableOpacity onPress={ this.signInDidTapped.bind(this) }>
+              <Image source={Email} style={imageStyle} />
+            </TouchableOpacity>
           </View>
         </View>
         <View style={buttonContainer}>
-          <TouchableOpacity onPress={ this.signInDidTapped.bind(this) }>
-            <Text style={titleText}>Sign In</Text>
-            <Text style={titleText}>Create An Account</Text>
-          </TouchableOpacity>
+          <Text style={titleText}>Click The Email Icon to Sign In or Create an Account</Text>
         </View>
 
         <View>

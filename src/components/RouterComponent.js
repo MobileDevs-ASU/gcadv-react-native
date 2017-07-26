@@ -1,4 +1,6 @@
 import React from 'react';
+import { Animated } from 'react-native';
+import { AppLoading } from 'expo';
 import { Scene, Router } from 'react-native-router-flux';
 import About from './About/About';
 import Home from './Home';
@@ -9,11 +11,28 @@ import Chat from './Chat';
 import Training from './Training';
 import OnBoarding from './OnBoarding';
 import SignUp from './SignUp';
+import { connect } from 'react-redux';
 
 const RouterComponent = (props) => {
+
+  animation = () => {
+    this.opacity = new Animated.Value(0);
+    Animated.timing(this.opacity, {
+      toValue: 1,
+      timing: 1000
+    }).start();
+  }
+
   return (
     <Router>
-      <Scene hideNavBar={true} key="onboarding" initial>
+      <Scene
+        hideNavBar={true}
+        key="loading"
+        initial
+        component={AppLoading}
+      />
+
+      <Scene hideNavBar={true} key="onboarding">
         <Scene
           key="onBoarding"
           component={ OnBoarding }
@@ -30,7 +49,7 @@ const RouterComponent = (props) => {
         />
       </Scene>
 
-      <Scene key="main">
+      <Scene key="main" direction="horizontal" duration={ 1000 }>
         <Scene
           key="home"
           component={ Home }
@@ -80,4 +99,9 @@ const RouterComponent = (props) => {
   )
 }
 
-export default RouterComponent;
+mapStateToProps = state => {
+  const { userBool } = state.login;
+  return { userBool };
+}
+
+export default connect(mapStateToProps)(RouterComponent);

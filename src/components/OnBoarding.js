@@ -5,14 +5,19 @@ import {
   Text,
   PanResponder,
   Animated,
-  StatusBar
+  StatusBar,
+  AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
 import { setPage } from './../actions';
+import { Actions } from 'react-native-router-flux';
 import Login from './Login';
 import OnBoardMain from './OnBoardMain';
 import FacebookLogin from './FacebookLogin'
 import LoginSignUp from './LoginSignUp';
+import {
+  ErrorModal
+} from './common';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
@@ -87,6 +92,12 @@ class OnBoarding extends Component {
     }).start();
   }
 
+  renderError = () => {
+    if (this.props.error) {
+      return <ErrorModal />
+    }
+  }
+
   fillButton1 = () => {
     return this.props.page === 0 ? 'white' : 'transparent'
   }
@@ -124,6 +135,7 @@ class OnBoarding extends Component {
           <View style={[styles.navButton, {backgroundColor: this.fillButton2()}]}></View>
           <View style={[styles.navButton, {backgroundColor: this.fillButton3()}]}></View>
         </View>
+        {this.renderError()}
       </View>
     )
   }
@@ -172,8 +184,8 @@ const styles = {
 }
 
 const mapStateToProps = state => {
-  const { page } = state.onBoarding;
-  return { page };
+  const { page, error } = state.login;
+  return { page, error };
 };
 
 export default connect(mapStateToProps, { setPage })(OnBoarding);

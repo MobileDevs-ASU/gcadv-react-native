@@ -27,3 +27,5 @@ export const SET_PAGE = 'set_page';
 export const CREATE_EMAIL_ENTERED = 'create_email_entered';
 export const CREATE_PASSWORD_ENTERED = 'create_password_entered';
 export const CREATE_CONFIRM_PASSWORD_ENTERED = 'create_confirm_password_entered';
+export const USER_EXISTS = 'user_exists';
+export const USER_SIGNED_OUT = 'user_signed_out';

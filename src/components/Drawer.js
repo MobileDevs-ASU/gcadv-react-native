@@ -33,9 +33,10 @@ class Drawer extends Component {
       drawerFooterTextStyle,
       socialIconContainer,
       backbtnStyle,
-      iconStyle
+      iconStyle,
+      drawerRightContent,
+      drawerRightText
     } = styles
-    console.log(this.props.left)
     return (
       <LinearGradient
        colors={['#4A4A4A', '#404040', '#303030']}
@@ -53,6 +54,12 @@ class Drawer extends Component {
             <Text style={ drawerHeaderTextStyle }>
               GCADV
             </Text>
+          </View>
+
+          <View style={drawerRightContent}>
+            <TouchableOpacity onPress={ this.props.onRightPressed }>
+              <Text style={drawerRightText}>Sign out</Text>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -121,20 +128,28 @@ const styles = {
   drawerHeaderTextContainerStyle: {
     alignItems: 'center',
     justifyContent: 'center',
-    flexGrow: 1,
-    marginRight: 25,
+    flex: 2
   },
   drawerHeaderTextStyle: {
     fontSize: 22,
     fontWeight: '600',
     color: '#A3A3A3',
     shadowOpacity: .8,
+    fontFamily: 'Avenir Next',
     shadowColor: '#000000',
     shadowOffset: { width: 2, height: 2 }
   },
   drawerLeftContent: {
     justifyContent: 'center',
-    width: 25,
+    flex: 1
+  },
+  drawerRightContent: {
+    justifyContent: 'center',
+    flex: 1
+  },
+  drawerRightText: {
+    textAlign: 'right',
+    color: 'white'
   },
   navigationStyle: {
     paddingLeft: 20,

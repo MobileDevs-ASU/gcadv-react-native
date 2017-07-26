@@ -16,9 +16,12 @@ import {
   LOGIN_USER_FAILED,
   LOGIN_USER,
   FACEBOOK_LOGIN_SUCCESS,
-  FACEBOOK_LOGIN_FAILED
+  FACEBOOK_LOGIN_FAILED,
+  USER_EXISTS,
+  USER_SIGNED_OUT
 } from './types';
 
+export * from './loginActions';
 export * from './chatActions';
 export * from './eventsActions';
 export * from './trainingActions';
@@ -26,12 +29,6 @@ export * from './aboutActions';
 export * from './onBoardingAction';
 export * from './createAccountActions';
 
-export const selectAbout = (aboutId) => {
-  return {
-    type: SELECT_ABOUT,
-    payload: aboutId
-  }
-}
 
 export const setImg = (imgId) => {
   return {
@@ -67,90 +64,3 @@ export const hideStatusBar = (hidden) => {
     payload: hidden
   }
 }
-
-export const emailChanedText = (text) => {
-  return {
-    type: EMAIL_ENTERED,
-    payload: text
-  }
-}
-
-export const passwordChangedText = (text) => {
-  return {
-    type: PASSWORD_ENTERED,
-    payload: text
-  };
-};
-
-export const loginUser = ({email, password}) =>  async dispatch => {
-  let userToken = await AsyncStorage.getItem('user');
-  if(userToken) {
-    loginUserSucess(dispatch, userToken);
-  }else{
-    dispatch({type: LOGIN_USER});
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(user => {
-        loginUserSuccess(dispatch, user);
-      })
-      .catch(() => loginUserFailed(dispatch));
-  };
-};
-
-export const createUser = ({ email, password, confirmPassword }) => async dispatch => {
-  if (password === confirmPassword) {
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(user => {
-        loginUserSuccess(dispatch, user)
-      })
-      .catch(() => loginUserFailed(dispatch));
-  }else{
-    loginUserFailed(dispatch);
-  }
-}
-
-const loginUserSuccess = (dispatch, user) => {
-  dispatch({
-    type: LOGIN_USER_SUCESS,
-    payload: user
-  });
-  Actions.main({ type: 'replace' });
-};
-
-const loginUserFailed = (dispatch) => {
-  dispatch({ type: LOGIN_USER_FAILED });
-};
-
-export const facebookLogin = () => async dispatch => {
-  let token = await AsyncStorage.getItem('fb_token');
-  if(token) {
-    Actions.main();
-    dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token })
-  } else {
-    doFaceBookLogin(dispatch);
-  }
-};
-
-const doFaceBookLogin = async dispatch => {
-  let { token, type } = await Facebook.logInWithReadPermissionsAsync('430338160680705', {
-    permission: ['public_profile']
-  });
-
-  if(type === 'cancel') {
-    return dispatch({ type: FACEBOOK_LOGIN_FAILED })
-  }
-
-  await AsyncStorage.setItem('fb_token', token);
-  const provider = firebase.auth.FacebookAuthProvider
-  const credential = provider.credential(token)
-  firebase.auth().signInWithCredential(credential)
-  Actions.main();
-  dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
-};
-
-// export const attemptLogin = (dispatch) => {
-//   var token = AsyncStorage.getItem('user');
-//   if(token) {
-//     Actions.main();
-//     dispatch({ type: LOGIN_USER_SUCESS, payload: user })
-//   }
-// }

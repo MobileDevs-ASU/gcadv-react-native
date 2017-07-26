@@ -55,7 +55,6 @@ const CardHeader = (props) => {
 
 const styles = {
   container: {
-    height: 80,
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#d8d8d8',

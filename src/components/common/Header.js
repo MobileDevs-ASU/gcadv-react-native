@@ -42,7 +42,7 @@ Header = (props) => {
 
       <View style={ headerContentRight }>
         <TouchableOpacity onPress={() => Communications.phonecall('6786203481', true)} style={ rightTouchableOpacityStyle } >
-          <Image source={ phone }  style={ rightIconStyle } />
+          <Text>Donate</Text>
         </TouchableOpacity>
       </View>
     </View>

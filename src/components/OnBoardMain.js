@@ -11,6 +11,7 @@ import GCADV_Icon from './../images/GCADV_logo.png';
 const SCREEN_WIDTH = Dimensions.get('window').width
 class OnBoardMain extends Component {
   componentWillMount() {
+    this.background = new Animated.Value(0);
     this.title = new Animated.Value(0);
     this.image = new Animated.Value(0);
     this.welcome = new Animated.Value(0);
@@ -18,6 +19,10 @@ class OnBoardMain extends Component {
   }
   componentDidMount() {
     Animated.sequence([
+      Animated.timing( this.background, {
+        toValue: 1,
+        duration: 400
+      }),
       Animated.timing(this.image, {
         toValue: 1,
         duration: 1500,
@@ -43,7 +48,7 @@ class OnBoardMain extends Component {
       bottomControl
     } = styles
     return  (
-      <View style={ container }>
+      <Animated.View style={[ container, { opacity: this.background } ]}>
           <Animated.View style={[imageContainer, {opacity: this.image}]}>
             <Image
               source={GCADV_Icon}
@@ -52,7 +57,7 @@ class OnBoardMain extends Component {
           </Animated.View>
           <Animated.Text style={[titleStyle, { opacity: this.title }]}>Georgia Coalition Against Domestic Violence</Animated.Text>
           <Animated.Text style={[bottomControl, {opacity: this.scroll}]}>Scroll to Sign in!</Animated.Text>
-      </View>
+      </Animated.View>
     )
   }
 }

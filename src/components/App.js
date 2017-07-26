@@ -6,15 +6,17 @@ import {
   Dimensions,
   StyleSheet,
   TouchableWithoutFeedback,
-  StatusBar
+  StatusBar,
+  AsyncStorage
 } from 'react-native';
-import { Components, WebBrowser } from 'expo';
+import { Components, WebBrowser, AppLoading } from 'expo';
 const { BlurView } = Components;
 import { Actions } from 'react-native-router-flux';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import Router from './RouterComponent';
 import Drawer from './Drawer';
-import { toggleDrawer, imageLoading, hideStatusBar } from '../actions';
+import { toggleDrawer, imageLoading, hideStatusBar, signOut, tryPreLogin } from '../actions';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -78,6 +80,17 @@ class App extends Component {
     this.state = { panResponder };
   }
 
+  componentWillMount() {
+    this.props.tryPreLogin();
+  }
+
+  checkIfUser() {
+    if(_.isNull(this.props.userBool)) {
+      return <AppLoading />
+    }
+  }
+
+
   springBack(x) {
     const {
       open
@@ -114,6 +127,11 @@ class App extends Component {
 
   hideBar() {
     this.props.hideStatusBar(!this.props.hidden);
+  }
+
+  onSignOutPressed = () => {
+    this.props.signOut();
+    this.togglePressed();
   }
 
   togglePressed() {
@@ -160,12 +178,14 @@ class App extends Component {
     const { shadowStyle } = this.props
     return (
       <View style={{flex: 1}}>
+        {this.checkIfUser()}
         <StatusBar
           hidden={this.props.hidden}
           showHideTransition='fade'
           animated={true}
         />
         <Drawer
+          onRightPressed={this.onSignOutPressed.bind(this)}
           onPress={this.togglePressed.bind(this)}
           onAboutPress={this.onAboutPress.bind(this)}
           onHomePress={this.onHomePress.bind(this)}
@@ -197,13 +217,14 @@ class App extends Component {
 mapStateToProps = state => {
   const { open } = state.drawer;
   const { hidden } = state.statusBar;
-  const { user } = state.login
+  const { user, userBool } = state.login
   const toValue = open ? 300 : 0;
   return {
     open,
     toValue,
     hidden,
-    user
+    user,
+    userBool
   }
 }
 
@@ -218,4 +239,4 @@ const styles = {
 }
 
 
-export default connect(mapStateToProps, { toggleDrawer, imageLoading, hideStatusBar })(App);
+export default connect(mapStateToProps, { toggleDrawer, imageLoading, hideStatusBar, signOut, tryPreLogin })(App);

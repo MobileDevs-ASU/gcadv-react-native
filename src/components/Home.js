@@ -5,9 +5,11 @@ import {
   Image,
   TouchableWithoutFeedback,
   ListView,
-  Dimensions
+  Dimensions,
+  Animated
 } from 'react-native';
 import _ from 'lodash';
+import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 import { Components } from 'expo';
  import { connect } from'react-redux'
  import { Actions } from 'react-native-router-flux';
@@ -26,10 +28,20 @@ const LISTVIEW_HEIGHT = Dimensions.get('window').height - 165
 import GCADVLogo from '../images/GCADV_logo.png';
 import EventImg from './../../assets/images/Event.jpg'
 
+const SCREEN_WIDTH = Dimensions.get('window').width
+
 class Home extends Component {
   componentWillMount() {
     this.props.getEvents();
-    this.createDataSource(this.props)
+    this.createDataSource(this.props);
+    this.position = new Animated.Value(0);
+  }
+
+  componentDidMount() {
+    Animated.timing(this.position, {
+      toValue: 1,
+      duration: 400
+    }).start();
   }
 
   createDataSource({ events }) {
@@ -62,14 +74,9 @@ class Home extends Component {
   }
 
   render() {
-    const {
-      title,
-      description,
-      image
-    } = this.props.events[0];
     const { headerImageStyle, AnimatedContianer } = styles
     return (
-      <View style={{flex: 1, zIndex: -1}}>
+      <Animated.View style={[{flex: 1, zIndex: -1}, {opacity: this.position}]}>
         <Header onPress={this.props.onPress}>
           <Image source={ GCADVLogo } style={ headerImageStyle } />
         </Header>
@@ -81,7 +88,7 @@ class Home extends Component {
           />
         </View>
         <Footer />
-      </View>
+      </Animated.View>
     );
   }
 }
@@ -111,7 +118,6 @@ const mapStateToProps = state => {
   const events = _.map(state.events.events, (val, uid) => {
     return { ...val, uid };
   });
-  console.log(events)
   return {
     events,
     image: state.image

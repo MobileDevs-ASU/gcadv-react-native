@@ -22,9 +22,6 @@ var config = {
 firebase.initializeApp(config);
 
 class App extends Component {
-  componentWillMount() {
-
-  }
   render() {
     const store = createStore(reducers, {}, applyMiddleware(thunk));
     return (

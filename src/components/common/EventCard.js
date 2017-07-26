@@ -46,7 +46,7 @@ const styles = {
     marginRight: 10,
     marginLeft: 10,
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: 10,
   },
   cardStyle: {
     flex: 1,

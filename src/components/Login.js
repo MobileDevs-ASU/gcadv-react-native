@@ -40,6 +40,11 @@ class Login extends Component {
   onBackPressed = () => {
     Actions.pop();
   }
+  alertError = () => {
+    if (this.props.error) {
+      alert(this.props.error)
+    }
+  }
 
   async componentDidMount() {
     try {
@@ -104,7 +109,7 @@ class Login extends Component {
           />
           { this.renderButton() }
         </View>
-        <Text>{this.props.error}</Text>
+        {this.alertError()}
       </View>
     )
   }
