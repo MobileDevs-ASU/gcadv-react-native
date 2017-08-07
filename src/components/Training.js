@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  ListView
+  ListView,
+  Image
 } from 'react-native';
 import _ from 'lodash'
 import { Video } from 'expo';
@@ -13,6 +14,8 @@ import {
   Card,
   TrainingCard
 } from './common'
+
+import GCADVLogo from '../images/GCADV_logo.png';
 
 class Training extends Component {
 
@@ -39,13 +42,12 @@ class Training extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Header />
-        <View style={{flex: 1, flexGrow: 1}}>
-          <ListView
-            enableEmptySections
-            dataSource={this.dataSource}
-            renderRow={this.renderRows}
-          />
+        <Header onPress={this.props.onPress}>
+          <Image source={ GCADVLogo } style={{height: 52.5, width: 52.5}} />
+        </Header>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontFamily: 'Avenir Next Condensed', fontSize: 48, color: '#979797'}}>Coming Soon!</Text>
+          <Text style={{fontFamily: 'Avenir Next', fontSize: 18, color: '#979797'}}>check back periodically</Text>
         </View>
       </View>
     )

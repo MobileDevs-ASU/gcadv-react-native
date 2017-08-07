@@ -19,9 +19,11 @@ const styles = {
   },
   seperatorStyle: {
     width: SCREEN_WIDTH * 0.9,
-    height: 1,
+    height: 2.5,
     opacity: 0.5,
-    backgroundColor: '#A3A3A3'
+    borderColor: '#A3A3A3',
+    borderWidth: 1,
+    borderRadius: 5
   }
 }
 

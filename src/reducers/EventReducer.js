@@ -18,7 +18,6 @@ export default (state = INITIAL_STATE, action) => {
     case EVENTS_RECEIVED:
       return { ...state, events: action.payload, loading: false };
     case GO_TO_EVENT:
-    console.log(action.payload);
       return { ...state, event: action.payload }
     default:
       return state;

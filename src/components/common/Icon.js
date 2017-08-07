@@ -11,7 +11,7 @@ const Icon = (props) => {
   } = styles
   return (
     <TouchableOpacity style={props.style} onPress={props.onPress}>
-      <Image style={iconStyle}  source={props.source} />
+      <Image style={{...iconStyle, ...props.imageStyle}}  source={props.source} />
     </TouchableOpacity>
   )
 }

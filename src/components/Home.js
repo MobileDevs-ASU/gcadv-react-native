@@ -57,7 +57,7 @@ class Home extends Component {
 
   onPress = (event) => {
     this.props.goToEvent(event);
-    Actions.event({ type: 'replace' });
+    Actions.event({ type: 'push' });
   }
 
   renderRows = (event) => {
@@ -73,19 +73,32 @@ class Home extends Component {
     this.props.imageLoading(bool);
   }
 
+  renderListView = () => {
+    if (_.isNull(this.props.events)) {
+      return (
+        <View>
+          <Text>Test</Text>
+        </View>
+      )
+    }
+    return (
+      <ListView
+        enableEmptySections
+        dataSource={ this.dataSource }
+        renderRow={ this.renderRows }
+      />
+    )
+  }
+
   render() {
     const { headerImageStyle, AnimatedContianer } = styles
     return (
       <Animated.View style={[{flex: 1, zIndex: -1}, {opacity: this.position}]}>
-        <Header onPress={this.props.onPress}>
+        <Header onPress={this.props.onPress} buttonStyle={this.props.buttonStyle}>
           <Image source={ GCADVLogo } style={ headerImageStyle } />
         </Header>
         <View style={{height: LISTVIEW_HEIGHT}}>
-          <ListView
-            enableEmptySections
-            dataSource={ this.dataSource }
-            renderRow={ this.renderRows }
-          />
+          {this.renderListView()}
         </View>
         <Footer />
       </Animated.View>

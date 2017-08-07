@@ -5,12 +5,15 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  Animated
+  Animated,
+  Linking
 } from 'react-native';
+import AppLink from 'react-native-app-link';
 import { NavigationButton, Icon } from './common';
 import { Components } from 'expo';
 const { LinearGradient } = Components;
 
+import icon from './../images/GCADV_logo.png';
 import backBtn from '../images/BackButton.png'
 import facebook from '../images/fb-icon.png'
 import linkedin from '../images/linkedin.png';
@@ -20,6 +23,32 @@ import twitter from '../images/twitter.png';
 const DRAWER_HEIGHT = Dimensions.get('window').height
 const DRAWER_WIDTH = 300;
 class Drawer extends Component {
+
+  linkToApp = (url) => {
+    Linking.openURL(url)
+    .catch(() => this.openInAppStore())
+  }
+
+  openInAppStore = () => {
+    const facebook = {
+      appStoreId: 'id284882215',
+    }
+    const twitter = {
+      appStoreId: 'id333903271'
+    }
+    const linkedin = {
+      appStoreId: 'id288429040'
+    }
+    const instagram = {
+      appStoreId: 'id389801252'
+    }
+    AppLink.openInStore(config.appStoreId).then(() => {
+
+    })
+    .catch(error => {
+      alert(error)
+    });
+  }
 
   render() {
     const {
@@ -33,13 +62,12 @@ class Drawer extends Component {
       drawerFooterTextStyle,
       socialIconContainer,
       backbtnStyle,
-      iconStyle,
       drawerRightContent,
       drawerRightText
     } = styles
     return (
       <LinearGradient
-       colors={['#4A4A4A', '#404040', '#303030']}
+       colors={['#fff', '#f8f8f8']}
        style={ styles.drawerStyle }>
         <View style={ drawerHeaderStyle }>
           <View style={ drawerLeftContent }>
@@ -47,13 +75,12 @@ class Drawer extends Component {
               source={backBtn}
               onPress={this.props.onPress}
               style={backbtnStyle}
+              imageStyle={{height: 30, width: 30, resizeMode: 'contain'}}
             />
           </View>
 
           <View style={ drawerHeaderTextContainerStyle }>
-            <Text style={ drawerHeaderTextStyle }>
-              GCADV
-            </Text>
+            <Image source={icon} style={{resizeMode: 'contain', height: 45, width: 45}} />
           </View>
 
           <View style={drawerRightContent}>
@@ -66,21 +93,25 @@ class Drawer extends Component {
         <View style={navigationStyle}>
           <NavigationButton
             title="Home"
+            type="home"
             onPress={this.props.onHomePress}
           />
 
           <NavigationButton
             title="Training"
+            type="training"
             onPress={this.props.onTrainingPress}
           />
 
           <NavigationButton
             title="About Us"
+            type="about"
             onPress={this.props.onAboutPress}
           />
 
           <NavigationButton
             title="Donate"
+            type="donate"
             onPress={this.props.onDonatePress}
           />
         </View>
@@ -91,10 +122,22 @@ class Drawer extends Component {
           </Text>
 
           <View style={ socialIconContainer }>
-            <Icon style={iconStyle} source={facebook}/>
-            <Icon style={iconStyle} source={linkedin}/>
-            <Icon style={iconStyle} source={instagram}/>
-            <Icon style={iconStyle} source={twitter} />
+            <Icon
+              source={facebook}
+              onPress={this.linkToApp.bind(this, 'fb://profile?id=101286490004867')}
+            />
+            <Icon
+              source={linkedin}
+              onPress={this.linkToApp.bind(this, 'linkedin://profile?id=[gcadv]')}
+            />
+            <Icon
+              source={instagram}
+              onPress={this.linkToApp.bind(this, 'instagram://user?username=gcadv')}
+            />
+            <Icon
+              source={twitter}
+              onPress={this.linkToApp.bind(this, 'twitter://user?screen_name=gcadv')}
+            />
           </View>
         </View>
       </LinearGradient>
@@ -111,18 +154,14 @@ const styles = {
     width: DRAWER_WIDTH,
     backgroundColor: 'transparent',
   },
-  iconStyle: {
-    shadowOpacity: .8,
-    shadowColor: '#000000',
-    shadowOffset: { width: 2, height: 2 }
-  },
   drawerHeaderStyle: {
     borderBottomWidth: 1,
+    backgroundColor: 'white',
     borderBottomColor: '#707070',
     height: 75,
     flexDirection: 'row',
-    paddingLeft: 20,
-    paddingRight: 15,
+    paddingLeft: 12.5,
+    paddingRight: 12.5,
     paddingTop: 12.5
   },
   drawerHeaderTextContainerStyle: {
@@ -131,25 +170,24 @@ const styles = {
     flex: 2
   },
   drawerHeaderTextStyle: {
-    fontSize: 22,
-    fontWeight: '600',
+    fontSize: 28,
     color: '#A3A3A3',
-    shadowOpacity: .8,
-    fontFamily: 'Avenir Next',
-    shadowColor: '#000000',
-    shadowOffset: { width: 2, height: 2 }
+    fontWeight: '400',
+    fontFamily: 'Avenir',
   },
   drawerLeftContent: {
     justifyContent: 'center',
-    flex: 1
+    flex: 1.5
   },
   drawerRightContent: {
     justifyContent: 'center',
-    flex: 1
+    flex: 1.5
   },
   drawerRightText: {
     textAlign: 'right',
-    color: 'white'
+    color: '#A3A3A3',
+    fontSize: 16,
+    fontFamily: 'Avenir Next'
   },
   navigationStyle: {
     paddingLeft: 20,
@@ -166,7 +204,7 @@ const styles = {
   drawerFooterTextStyle: {
     textAlign: 'center',
     fontSize: 22,
-    fontWeight: '300',
+    fontWeight: '400',
     color: '#A3A3A3'
   },
   socialIconContainer: {
@@ -178,13 +216,9 @@ const styles = {
     paddingLeft: 20
   },
   backbtnStyle: {
-    height: 35,
-    width: 35,
-    borderRadius: 35/2,
+    height: 20,
+    width: 20,
     justifyContent: 'center',
-    shadowOpacity: .2,
-    shadowColor: '#000000',
-    shadowOffset: { width: 2, height: 2 }
   }
 }
 

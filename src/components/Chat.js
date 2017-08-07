@@ -7,6 +7,7 @@ import {
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import * as firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 import { chatChanged, messageSent, messageFetched } from './../actions';
 import {
   MessageBox,
@@ -47,7 +48,10 @@ class Chat extends Component {
     } = styles
     return (
       <View style={ container }>
-        <Header>
+        <Header
+          onPress={ () => Actions.pop() }
+          back
+        >
           <Text>{this.props.eventId}</Text>
         </Header>
         <ListView

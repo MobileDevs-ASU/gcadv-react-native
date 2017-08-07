@@ -15,12 +15,11 @@ export const chatChanged = text => {
   };
 };
 
-export const messageSent = ( eventId, message, { uid, email }) => dispatch => {
+export const messageSent = ( eventId, message, user) => dispatch => {
   dispatch({ type: LOADING_MESSAGE })
   const ref = firebase.database().ref("/Events/" + eventId + "/messages").push().set({
     message,
-    email,
-    user: uid
+    user: user
   })
   .then(() =>{
     dispatch({ type: MESSAGE_SENT });

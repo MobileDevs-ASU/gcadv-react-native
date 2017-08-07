@@ -6,11 +6,13 @@
   "private": true,
   "main": "main.js",
   "dependencies": {
+    "axios": "^0.16.2",
     "expo": "17.0.0",
     "firebase": "^4.1.3",
     "lodash": "^4.17.4",
     "react": "16.0.0-alpha.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-17.0.0.tar.gz",
+    "react-native-app-link": "^0.4.0",
     "react-native-communications": "^2.2.1",
     "react-native-linear-gradient": "^2.1.0",
     "react-native-router-flux": "^3.40.1",
@@ -18,5 +20,9 @@
     "react-redux": "^5.0.5",
     "redux": "^3.7.0",
     "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "firebase": "^4.2.0",
+    "jest": "^20.0.4"
   }
 }

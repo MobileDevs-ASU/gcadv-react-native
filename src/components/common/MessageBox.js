@@ -3,7 +3,8 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
-  View
+  View,
+  KeyboardAvoidingView
 } from 'react-native';
 import { Spinner } from './index'
 
@@ -31,17 +32,19 @@ const MessageBox = (props) => {
   }
 
   return (
-    <View style={ container }>
-      <TextInput
-        style={ input }
-        placeholder="enter message here"
-        onChangeText={ props.onChangeText }
-        value={ props.value }
-      />
-      <View style={ button }>
-        { this.renderButton() }
+    <KeyboardAvoidingView behavior="position">
+      <View style={ container }>
+        <TextInput
+          style={ input }
+          placeholder="enter message here"
+          onChangeText={ props.onChangeText }
+          value={ props.value }
+        />
+        <View style={ button }>
+          { this.renderButton() }
+        </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

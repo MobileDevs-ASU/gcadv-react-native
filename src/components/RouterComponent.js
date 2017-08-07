@@ -55,7 +55,8 @@ const RouterComponent = (props) => {
           component={ Home }
           hideNavBar={true}
           passProps={true}
-          onPress={props.onPress}
+          buttonStyle={props.buttonStyle}
+          onPress={props.onTogglePress}
           initial
         />
 
@@ -64,7 +65,7 @@ const RouterComponent = (props) => {
           component={ Event }
           hideNavBar={true}
           passProps={true}
-          onPress={props.onPress}
+          onPress={props.onBackPressed}
         />
 
         <Scene
@@ -72,7 +73,7 @@ const RouterComponent = (props) => {
           component={ About }
           hideNavBar={true}
           passProps={true}
-          onPress={props.onPress}
+          onPress={props.onTogglePress}
         />
 
         <Scene
@@ -85,6 +86,8 @@ const RouterComponent = (props) => {
           component={ Training }
           key="training"
           hideNavBar={ true }
+          passProps={true}
+          onPress={props.onTogglePress}
         />
 
         <Scene

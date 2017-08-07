@@ -84,13 +84,6 @@ class App extends Component {
     this.props.tryPreLogin();
   }
 
-  checkIfUser() {
-    if(_.isNull(this.props.userBool)) {
-      return <AppLoading />
-    }
-  }
-
-
   springBack(x) {
     const {
       open
@@ -114,7 +107,9 @@ class App extends Component {
     this.props.imageLoading(false);
     this.togglePressed()
   }
-
+  onBackPressed = () => {
+    Actions.pop();
+  }
   onTrainingPress() {
     Actions.training({ type: 'replace' });
     this.props.imageLoading(false);
@@ -174,11 +169,20 @@ class App extends Component {
     }
   }
 
+  changeButtonOpacity = () => {
+    const opacity = this.position.x.interpolate({
+      inputRange: [ 0, 150, 300 ],
+      outputRange: [1, .5, 0]
+    });
+    return {
+      opacity
+    }
+  }
+
   render() {
     const { shadowStyle } = this.props
     return (
       <View style={{flex: 1}}>
-        {this.checkIfUser()}
         <StatusBar
           hidden={this.props.hidden}
           showHideTransition='fade'
@@ -206,7 +210,9 @@ class App extends Component {
           </TouchableWithoutFeedback>
           </Animated.View>
           <Router
-            onPress={this.togglePressed.bind(this)}
+            buttonStyle={this.changeButtonOpacity()}
+            onTogglePress={this.togglePressed.bind(this)}
+            onBackPressed={this.onBackPressed.bind(this)}
           />
       </Animated.View>
       </View>
