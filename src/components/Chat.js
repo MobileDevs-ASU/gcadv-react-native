@@ -44,7 +44,8 @@ class Chat extends Component {
   render() {
     const {
       container,
-      messageContainer
+      messageContainer,
+      headerText
     } = styles
     return (
       <View style={ container }>
@@ -52,7 +53,7 @@ class Chat extends Component {
           onPress={ () => Actions.pop() }
           back
         >
-          <Text>{this.props.eventId}</Text>
+          <Text style={headerText}>{this.props.eventId}</Text>
         </Header>
         <ListView
           enableEmptySections
@@ -76,6 +77,11 @@ const styles = {
   },
   messageContainer: {
     flex: 1
+  },
+  headerText: {
+    fontFamily: 'Avenir Next Condensed',
+    fontSize: 32,
+    color: '#979797'
   }
 }
 

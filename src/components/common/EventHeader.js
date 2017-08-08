@@ -114,8 +114,10 @@ const styles = {
   },
   messageIconContainerStyle: {
     position: 'absolute',
-    bottom: 5,
-    right: 5
+    bottom: 12.5,
+    right: 7.5,
+    height: 35,
+    width: 35,
   },
   gradientStyle: {
     flex: 1
@@ -150,12 +152,9 @@ const styles = {
     width: SCREEN_WIDTH * 0.8
   },
   messageIconStyle: {
-    width: 35,
+    zIndex: 999,
     height: 35,
-    position: 'absolute',
-    bottom: 2.5,
-    right: 7.5,
-    zIndex: 999
+    width: 35,
   },
   innerTextContainer: {
     position: 'absolute',

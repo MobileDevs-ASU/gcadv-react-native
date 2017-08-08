@@ -8,6 +8,7 @@ import {
   Animated,
   Linking
 } from 'react-native';
+import { connect } from 'react-redux';
 import AppLink from 'react-native-app-link';
 import { NavigationButton, Icon } from './common';
 import { Components } from 'expo';
@@ -79,7 +80,7 @@ class Drawer extends Component {
             />
           </View>
 
-          <View style={ drawerHeaderTextContainerStyle }>
+          <View style={drawerHeaderTextContainerStyle}>
             <Image source={icon} style={{resizeMode: 'contain', height: 45, width: 45}} />
           </View>
 
@@ -156,7 +157,6 @@ const styles = {
   },
   drawerHeaderStyle: {
     borderBottomWidth: 1,
-    backgroundColor: 'white',
     borderBottomColor: '#707070',
     height: 75,
     flexDirection: 'row',
@@ -222,5 +222,10 @@ const styles = {
   }
 }
 
+mapStateToProps = state => {
+  const { open } = state.drawer;
+  return { open }
+}
 
-export default Drawer;
+
+export default connect(mapStateToProps)(Drawer);
